@@ -183,7 +183,6 @@ public class SerializedFileReader implements Closeable {
             resourceBuffer = ByteBufferUtils.openReadOnly(streamFile);
         }
     }
-
 }
     }
 }
