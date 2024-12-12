@@ -22,7 +22,7 @@ import java.util.Objects;
 public class TypeTreeV2<T extends TypeV1> extends TypeTreeV1<T> {
 
     protected UnityVersion revision = new UnityVersion();
-    protected int attributes;
+    protected int attributes = 0;
 
     public TypeTreeV2(Class<T> elementFactory) {
         super(elementFactory);
@@ -59,7 +59,6 @@ public class TypeTreeV2<T extends TypeV1> extends TypeTreeV1<T> {
     public void write(DataWriter out) throws IOException {
         out.writeStringNull(revision.toString());
         out.writeInt(attributes);
-
         super.write(out);
 
         // padding

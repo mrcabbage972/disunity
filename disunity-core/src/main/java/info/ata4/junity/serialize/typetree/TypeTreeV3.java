@@ -198,7 +198,6 @@ public class TypeTreeV3<T extends TypeV2> extends TypeTreeV2<T> {
     }
 
     private void serializeNode(Node<T> node, List<T> list, int level) {
-        node.data().treeLevel(level);
         list.add(node.data());
         node.forEach(n -> serializeNode(n, list, level + 1));
     }

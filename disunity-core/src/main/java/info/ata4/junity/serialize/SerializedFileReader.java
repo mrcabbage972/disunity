@@ -184,8 +184,6 @@ public class SerializedFileReader implements Closeable {
         }
     }
 
-    @Override
-    public void close() throws IOException {
-        in.close();
+}
     }
 }

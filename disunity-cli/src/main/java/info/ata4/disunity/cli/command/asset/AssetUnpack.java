@@ -103,7 +103,6 @@ public class AssetUnpack extends AssetCommand {
                     String objectDataName = String.format("%010d", od.id());
                     Path objectDataFile = objectDataDir.resolve(objectDataName + ".block");
                     ByteBuffer objectDataBuffer = od.buffer();
-                    objectDataBuffer.rewind();
 
                     ByteBufferUtils.save(objectDataFile, objectDataBuffer);
                 }

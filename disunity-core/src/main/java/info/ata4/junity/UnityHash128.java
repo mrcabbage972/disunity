@@ -14,7 +14,7 @@ import info.ata4.io.DataWriter;
 import info.ata4.io.Struct;
 import java.io.IOException;
 import javax.xml.bind.DatatypeConverter;
-
+import java.security.cert.Certificate;
 /**
  *
  * @author Nico Bergemann <barracuda415 at yahoo.de>
@@ -40,5 +40,5 @@ public class UnityHash128 implements Struct {
     @Override
     public String toString() {
         return DatatypeConverter.printHexBinary(hash);
-    }
+     }
 }

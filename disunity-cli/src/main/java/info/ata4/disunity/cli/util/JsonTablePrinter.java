@@ -67,7 +67,7 @@ public class JsonTablePrinter extends TablePrinter {
             JsonObject jsonRow = new JsonObject();
 
             table.columnMap().forEach((ck, c) -> {
-                String key = String.valueOf(table.get(0, ck)).toLowerCase();
+                String key = String.format("%s", table.get(0, ck)).toLowerCase();
                 Object value = table.get(rk, ck);
                 jsonRow.add(key, gson.toJsonTree(value));
             });

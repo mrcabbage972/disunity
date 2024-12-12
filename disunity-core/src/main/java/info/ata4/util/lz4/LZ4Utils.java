@@ -53,7 +53,6 @@ enum LZ4Utils {
 
   static class Match {
     int start, ref, len;
-
     void fix(int correction) {
       start += correction;
       ref += correction;
@@ -65,7 +64,7 @@ enum LZ4Utils {
     }
   }
 
-  static void copyTo(Match m1, Match m2) {
+  static void copyTo(Match m1, final Match m2) {
     m2.len = m1.len;
     m2.start = m1.start;
     m2.ref = m1.ref;

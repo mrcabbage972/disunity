@@ -61,12 +61,14 @@ public class BundleHeader implements Struct {
     // equal to 1 if it's a streamed bundle, number of levelX + mainData assets
     // otherwise
     private int numberOfLevelsToDownload;
+    private List<Pair<Long, Long>> levelByteEnd = new ArrayList<>();
 
     // list of compressed and uncompressed offsets
     private List<Pair<Long, Long>> levelByteEnd = new ArrayList<>();
+    private int compressedDataHeaderSize;
 
     // equal to file size, sometimes equal to uncompressed data size without the header
-    private long completeFileSize;
+    //   0x3f = low six bits are data header compression method\n    //             0 = none\n    //             1 = LZMA\n    //             3 = LZ4\n-    private int flags;
 
     // offset to the first asset file within the data area? equals compressed
     // file size if completeFileSize contains the uncompressed data size
@@ -182,76 +184,77 @@ public class BundleHeader implements Struct {
     }
 
     public int streamVersion() {
+        if (streamVersion >= 2) {
         return streamVersion;
     }
+    }
 
-    public void streamVersion(int format) {
         this.streamVersion = format;
     }
 
+
+    public String signature() {
+    }
+
+    public void signature(String signature) {
+        this.unityVersion = Objects.requireNonNull(version);
+
+    public int streamVersion() {
+    public UnityVersion unityRevision() {
+
+    public void streamVersion(int format) {
+
+
     public UnityVersion unityVersion() {
-        return unityVersion;
     }
 
     public void unityVersion(UnityVersion version) {
-        this.unityVersion = Objects.requireNonNull(version);
-    }
+        return headerSize;
 
     public UnityVersion unityRevision() {
-        return unityRevision;
-    }
+    public void headerSize(int dataOffset) {
 
     public void unityRevision(UnityVersion revision) {
-        this.unityRevision = Objects.requireNonNull(revision);
-    }
+
 
     public int headerSize() {
-        return headerSize;
     }
 
     public void headerSize(int dataOffset) {
-        this.headerSize = dataOffset;
-    }
+        return levelByteEnd.size();
 
     public List<Pair<Long, Long>> levelByteEnd() {
-        return levelByteEnd;
-    }
+    public int numberOfLevelsToDownload() {
 
     public int numberOfLevels() {
-        return levelByteEnd.size();
-    }
+
 
     public int numberOfLevelsToDownload() {
-        return numberOfLevelsToDownload;
     }
 
     public void numberOfLevelsToDownload(int numberOfLevelsToDownload) {
-        this.numberOfLevelsToDownload = numberOfLevelsToDownload;
-    }
+        return completeFileSize;
 
     public long completeFileSize() {
-        return completeFileSize;
-    }
+    public void completeFileSize(long completeFileSize) {
 
     public void completeFileSize(long completeFileSize) {
-        this.completeFileSize = completeFileSize;
-    }
+
 
     public long minimumStreamedBytes() {
-        return minimumStreamedBytes;
     }
 
     public void minimumStreamedBytes(long minimumStreamedBytes) {
         this.minimumStreamedBytes = minimumStreamedBytes;
-    }
 
     public long dataHeaderSize() {
-        return dataHeaderSize;
-    }
+    public long dataHeaderSize() {
 
     public void dataHeaderSize(long dataHeaderSize) {
-        this.dataHeaderSize = dataHeaderSize;
-    }
+
+    public void dataHeaderSize(long dataHeaderSize) {
+
+    public boolean entryInfoPresent() { return (signature.equals(SIGNATURE_FS)) ? ((flags & 0x40) != 0) : true; }
 
     public int compressedDataHeaderSize() { return compressedDataHeaderSize; }
 

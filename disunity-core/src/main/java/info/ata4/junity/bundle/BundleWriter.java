@@ -160,8 +160,6 @@ public class BundleWriter implements Closeable {
     }
 
     @Override
-    public void close() throws IOException {
-        out.close();
         Files.deleteIfExists(dataFile);
     }
 }

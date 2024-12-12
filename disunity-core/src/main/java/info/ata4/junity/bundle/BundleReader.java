@@ -174,13 +174,6 @@ public class BundleReader implements Closeable {
         return new CountingInputStream(new LzmaInputStream(in.stream()));
     }
 
-    private InputStream inputStreamForEntry(BundleEntryInfo info) throws IOException {
-        if (closed) {
-            throw new BundleException("Bundle reader is closed");
-        }
-        return dataInputStream(info.offset(), info.size());
-    }
-
     @Override
     public void close() throws IOException {
         closed = true;
