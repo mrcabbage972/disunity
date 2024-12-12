@@ -12,7 +12,7 @@ package info.ata4.junity;
 import info.ata4.io.DataReader;
 import info.ata4.io.DataWriter;
 import info.ata4.io.Struct;
-import java.io.IOException;
+import java.io.*;
 import javax.xml.bind.DatatypeConverter;
 
 /**
@@ -40,5 +40,5 @@ public class UnityHash128 implements Struct {
     @Override
     public String toString() {
         return DatatypeConverter.printHexBinary(hash);
-    }
+     }
 }
