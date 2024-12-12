@@ -68,8 +68,8 @@ public class BundleHeader implements Struct {
     private int compressedDataHeaderSize;
 
     // equal to file size, sometimes equal to uncompressed data size without the header
-    //   0x3f = low six bits are data header compression method\n    //             0 = none\n    //             1 = LZMA\n    //             3 = LZ4\n-    private int flags;
-
+    //   0x3f = low six bits are data header compression method
+    //             0 = none
     // offset to the first asset file within the data area? equals compressed
     // file size if completeFileSize contains the uncompressed data size
     private long dataHeaderSize;
@@ -87,6 +87,7 @@ public class BundleHeader implements Struct {
     //             3 = LZ4
     private int flags;
 
+    private long completeFileSize;
     @Override
     public void read(DataReader in) throws IOException {
         signature = in.readStringNull();
@@ -189,39 +190,37 @@ public class BundleHeader implements Struct {
     }
     }
 
+    public void streamVersion(int format) {
         this.streamVersion = format;
     }
 
-
-    public String signature() {
-    }
-
-    public void signature(String signature) {
-        this.unityVersion = Objects.requireNonNull(version);
-
-    public int streamVersion() {
-    public UnityVersion unityRevision() {
-
-    public void streamVersion(int format) {
-
-
     public UnityVersion unityVersion() {
+        return unityVersion;
     }
 
     public void unityVersion(UnityVersion version) {
-        return headerSize;
+        this.unityVersion = Objects.requireNonNull(version);
+    }
 
     public UnityVersion unityRevision() {
-    public void headerSize(int dataOffset) {
+        return unityRevision;
+    }
 
     public void unityRevision(UnityVersion revision) {
-
+        this.unityRevision = Objects.requireNonNull(revision);
+    }
 
     public int headerSize() {
+        return headerSize;
     }
 
     public void headerSize(int dataOffset) {
+        this.headerSize = dataOffset;
+    }
+
+    public int numberOfLevels() {
         return levelByteEnd.size();
+    }
 
     public List<Pair<Long, Long>> levelByteEnd() {
     public int numberOfLevelsToDownload() {
@@ -231,19 +230,16 @@ public class BundleHeader implements Struct {
 
     public int numberOfLevelsToDownload() {
     }
-
+234 |
     public void numberOfLevelsToDownload(int numberOfLevelsToDownload) {
         return completeFileSize;
-
-    public long completeFileSize() {
-    public void completeFileSize(long completeFileSize) {
-
-    public void completeFileSize(long completeFileSize) {
-
-
-    public long minimumStreamedBytes() {
     }
 
+    public void completeFileSize(long completeFileSize) {
+        this.completeFileSize = completeFileSize;
+    }
+
+    public long minimumStreamedBytes() {
     public void minimumStreamedBytes(long minimumStreamedBytes) {
         this.minimumStreamedBytes = minimumStreamedBytes;
 
@@ -255,12 +251,12 @@ public class BundleHeader implements Struct {
     public void dataHeaderSize(long dataHeaderSize) {
 
     public boolean entryInfoPresent() { return (signature.equals(SIGNATURE_FS)) ? ((flags & 0x40) != 0) : true; }
-
+258 |
     public int compressedDataHeaderSize() { return compressedDataHeaderSize; }
-
+260 |
     public int dataHeaderCompressionScheme() { return (flags & 0x3f); }
-
+262 |
     public boolean dataHeaderAtEndOfFile() { return (flags & 0x80) != 0; }
-
+264 |
     public boolean entryInfoPresent() { return (signature.equals(SIGNATURE_FS)) ? ((flags & 0x40) != 0) : true; }
 }
