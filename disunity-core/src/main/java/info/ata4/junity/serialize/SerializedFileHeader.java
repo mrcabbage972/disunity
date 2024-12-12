@@ -80,7 +80,7 @@ public class SerializedFileHeader implements Struct {
         this.dataOffset = dataOffset;
     }
 
-    public byte endianness() {
+    public final byte endianness() {
         return endianness;
     }
 
@@ -88,8 +88,7 @@ public class SerializedFileHeader implements Struct {
         this.endianness = endianness;
     }
 
-    @Override
-    public void read(DataReader in) throws IOException {
+    public final void read(DataReader in) throws IOException {
         metadataSize = in.readInt();
         fileSize = in.readUnsignedInt();
         version = in.readInt();

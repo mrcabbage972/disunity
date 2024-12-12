@@ -30,8 +30,6 @@ import java.util.logging.Logger;
  *
  * @author Nico Bergemann <barracuda415 at yahoo.de>
  */
-@Parameters(
-    commandDescription = "Split asset file into data blocks."
 )
 public class AssetUnpack extends AssetCommand {
 

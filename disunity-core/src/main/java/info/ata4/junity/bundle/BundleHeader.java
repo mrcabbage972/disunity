@@ -93,8 +93,6 @@ public class BundleHeader implements Struct {
         unityRevision = new UnityVersion(in.readStringNull());
 
         if (signature.equals(SIGNATURE_FS)) {
-            // FS signature
-            // Expect streamVersion == 6
             completeFileSize = in.readLong();
             compressedDataHeaderSize = in.readInt();
             dataHeaderSize = in.readInt();
@@ -103,12 +101,9 @@ public class BundleHeader implements Struct {
             headerSize = (int) in.position();
 
             if ((flags & 0x80) == 0) {
-                // The data header is part of the bundle header
                 headerSize += compressedDataHeaderSize;
             }
-            // else it's at the end of the file
-        } else {
-            // Web or Raw signature
+        } else if (signature.equals(SIGNATURE_WEB) || signature.equals(SIGNATURE_RAW))  {
             minimumStreamedBytes = in.readUnsignedInt();
             headerSize = in.readInt();
 
@@ -256,8 +251,6 @@ public class BundleHeader implements Struct {
     public int compressedDataHeaderSize() { return compressedDataHeaderSize; }
 
     public int dataHeaderCompressionScheme() { return (flags & 0x3f); }
-
-    public boolean dataHeaderAtEndOfFile() { return (flags & 0x80) != 0; }
 
     public boolean entryInfoPresent() { return (signature.equals(SIGNATURE_FS)) ? ((flags & 0x40) != 0) : true; }
 }

@@ -67,17 +67,14 @@ public class BundleReader implements Closeable {
             DataReader inData;
             switch(header.dataHeaderCompressionScheme()) {
                 default:
-                case 0:
-                    // Not compressed
+                case 0: // Not compressed
                     inData = DataReaders.forInputStream(headerIn);
-
-                case 1:
-                    // LZMA
+                    break;
+                case 1: // LZMA
                     inData = DataReaders.forInputStream(
                             new CountingInputStream(new LzmaInputStream(headerIn)));
-
-                case 3:
-                    // LZ4
+                    break;
+                case 3: // LZ4
                     byte[] compressed = new byte[header.compressedDataHeaderSize()];
                     byte[] decompressed = new byte[(int)header.dataHeaderSize()];
                     headerIn.read(compressed);

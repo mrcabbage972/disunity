@@ -54,7 +54,7 @@ public class SerializedFile {
         return metadataBlock;
     }
 
-    public DataBlock objectDataBlock() {
+    public final DataBlock objectDataBlock() {
         return objectDataBlock;
     }
 
@@ -65,11 +65,11 @@ public class SerializedFile {
         return blocks;
     }
 
-    public ByteBuffer audioBuffer() {
+    public final ByteBuffer audioBuffer() {
         return audioBuffer;
     }
 
-    public void audioBuffer(ByteBuffer audioBuffer) {
+    public final void audioBuffer(ByteBuffer audioBuffer) {
         this.audioBuffer = audioBuffer;
     }
 }
