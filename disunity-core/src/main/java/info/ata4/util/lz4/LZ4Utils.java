@@ -16,28 +16,7 @@ package info.ata4.util.lz4;
  * limitations under the License.
  */
 
-import static info.ata4.util.lz4.LZ4Constants.HASH_LOG;
-import static info.ata4.util.lz4.LZ4Constants.HASH_LOG_64K;
-import static info.ata4.util.lz4.LZ4Constants.HASH_LOG_HC;
-import static info.ata4.util.lz4.LZ4Constants.LAST_LITERALS;
-import static info.ata4.util.lz4.LZ4Constants.MIN_MATCH;
-import static info.ata4.util.lz4.LZ4Constants.ML_BITS;
-import static info.ata4.util.lz4.LZ4Constants.ML_MASK;
-import static info.ata4.util.lz4.LZ4Constants.RUN_MASK;
-
-enum LZ4Utils {
-  ;
-
-  private static final int MAX_INPUT_SIZE = 0x7E000000;
-
-  static int maxCompressedLength(int length) {
-    if (length < 0) {
-      throw new IllegalArgumentException("length must be >= 0, got " + length);
-    } else if (length >= MAX_INPUT_SIZE) {
-        throw new IllegalArgumentException("length must be < " + MAX_INPUT_SIZE);
-    }
-    return length + length / 255 + 16;
-  }
+import static info.ata4.util.lz4.LZ4Constants.*;
 
   static int hash(int i) {
     return (i * -1640531535) >>> ((MIN_MATCH * 8) - HASH_LOG);
@@ -47,9 +26,8 @@ enum LZ4Utils {
     return (i * -1640531535) >>> ((MIN_MATCH * 8) - HASH_LOG_64K);
   }
 
-  static int hashHC(int i) {
-    return (i * -1640531535) >>> ((MIN_MATCH * 8) - HASH_LOG_HC);
-  }
+  enum LZ4Utils {
+    ;
 
   static class Match {
     int start, ref, len;

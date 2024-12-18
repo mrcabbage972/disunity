@@ -26,9 +26,7 @@ import java.util.logging.Logger;
  */
 public class SerializedFileWriter implements Closeable {
 
-    private static final Logger L = LogUtils.getLogger();
-
-    private static final int META_PADDING = 4096;
+    private static final int META_PADDING = 0x1000;
     private static final int META_ALIGN = 16;
 
     private final DataWriter out;
@@ -59,7 +57,7 @@ public class SerializedFileWriter implements Closeable {
 
             writeObjects(out);
             out.writeUnsignedByte(header.version() > 5 ? 0 : 1);
-
+            out.writeUnsignedByte(0);
             writeMetadata(out);
             out.writeUnsignedByte(0);
         } else {
@@ -69,7 +67,8 @@ public class SerializedFileWriter implements Closeable {
 
             // calculate padding
             if (dataOffset < META_PADDING) {
-                dataOffset = META_PADDING;
+                // round up to 4KiB boundary
+                dataOffset = META_PADDING + (META_PADDING - (dataOffset % META_PADDING));
             } else {
                 dataOffset += META_ALIGN - (dataOffset % META_ALIGN);
             }
@@ -88,10 +87,9 @@ public class SerializedFileWriter implements Closeable {
         header.fileSize(out.size());
 
         // FIXME: the metadata size is slightly off in comparison to original files
-        int metadataOffset = header.version() < 9 ? 2 : 1;
+        int metadataOffset = header.version() < 9 ? 2 : 0;
 
         header.metadataSize(serialized.metadataBlock().length() + metadataOffset);
-
         // write updated header
         out.order(ByteOrder.BIG_ENDIAN);
         out.position(serialized.headerBlock().offset());
@@ -104,7 +102,6 @@ public class SerializedFileWriter implements Closeable {
         out.writeStruct(serialized.header());
         headerBlock.markEnd(out);
         L.log(Level.FINER, "headerBlock: {0}", headerBlock);
-    }
 
     private void writeMetadata(DataWriter out) throws IOException {
         SerializedFileMetadata metadata = serialized.metadata();
@@ -116,7 +113,6 @@ public class SerializedFileWriter implements Closeable {
         out.writeStruct(metadata);
         metadataBlock.markEnd(out);
         L.log(Level.FINER, "metadataBlock: {0}", metadataBlock);
-    }
 
     private void writeObjects(DataWriter out) throws IOException {
         long ofsMin = Long.MAX_VALUE;
@@ -143,7 +139,6 @@ public class SerializedFileWriter implements Closeable {
         objectDataBlock.endOffset(ofsMax);
         L.log(Level.FINER, "objectDataBlock: {0}", objectDataBlock);
     }
-
     @Override
     public void close() throws IOException {
         out.close();

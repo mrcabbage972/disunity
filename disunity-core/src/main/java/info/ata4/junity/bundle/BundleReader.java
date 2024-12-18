@@ -18,7 +18,6 @@ import java.nio.ByteBuffer;
 import java.nio.file.Path;
 import static java.nio.file.StandardOpenOption.READ;
 import java.util.List;
-
 import info.ata4.util.lz4.LZ4FastDecompressor;
 import info.ata4.util.lz4.LZ4JavaSafeFastDecompressor;
 import net.contrapunctus.lzma.LzmaInputStream;
@@ -31,7 +30,6 @@ import org.apache.commons.io.input.CountingInputStream;
  * @author Nico Bergemann <barracuda415 at yahoo.de>
  */
 public class BundleReader implements Closeable {
-
     private final DataReader in;
     private Bundle bundle;
     private CountingInputStream lzma;
@@ -40,7 +38,6 @@ public class BundleReader implements Closeable {
     public BundleReader(Path file) throws IOException {
         in = DataReaders.forFile(file, READ);
     }
-
     public Bundle read() throws BundleException, IOException {
         bundle = new Bundle();
 
@@ -67,7 +64,7 @@ public class BundleReader implements Closeable {
             DataReader inData;
             switch(header.dataHeaderCompressionScheme()) {
                 default:
-                case 0:
+                    case 0:
                     // Not compressed
                     inData = DataReaders.forInputStream(headerIn);
 
@@ -88,7 +85,6 @@ public class BundleReader implements Closeable {
             // Block info: not captured for now
             {
                 // 16 bytes unknown
-                byte[] unknown = new byte[16];
                 inData.readBytes(unknown);
 
                 int storageBlocks = inData.readInt();
@@ -138,7 +134,6 @@ public class BundleReader implements Closeable {
         return bundle;
     }
 
-    private InputStream dataInputStream(long offset, long size) throws IOException {
         InputStream is;
 
         // use LZMA stream if the bundle is compressed
@@ -170,7 +165,6 @@ public class BundleReader implements Closeable {
     }
 
     private CountingInputStream lzmaInputStream() throws IOException {
-        in.position(bundle.header().headerSize());
         return new CountingInputStream(new LzmaInputStream(in.stream()));
     }
 
@@ -181,9 +175,9 @@ public class BundleReader implements Closeable {
         return dataInputStream(info.offset(), info.size());
     }
 
+    private InputStream dataInputStream(long offset, long size) throws IOException {
     @Override
     public void close() throws IOException {
-        closed = true;
         if (lzma != null) {
             lzma.close();
         }

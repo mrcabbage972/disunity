@@ -31,7 +31,6 @@ public class DisUnity {
     public static String getSignature() {
         return getName() + " v" + getVersion();
     }
-
     private DisUnity() {
     }
 }

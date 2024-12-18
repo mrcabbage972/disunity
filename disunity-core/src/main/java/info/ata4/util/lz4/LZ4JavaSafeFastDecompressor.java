@@ -183,6 +183,7 @@ public final class LZ4JavaSafeFastDecompressor extends LZ4FastDecompressor {
       matchLen += MIN_MATCH;
 
       final int matchCopyEnd = dOff + matchLen;
++sOff;\n\n       // literals\n@@ -222,7 +223,7 @@
 
       if (matchCopyEnd > destEnd - COPY_LENGTH) {
         if (matchCopyEnd > destEnd) {
@@ -202,4 +203,3 @@ public final class LZ4JavaSafeFastDecompressor extends LZ4FastDecompressor {
 
 
 }
-

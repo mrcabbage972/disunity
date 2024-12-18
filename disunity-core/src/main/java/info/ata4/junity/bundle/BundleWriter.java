@@ -20,7 +20,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import static java.nio.file.StandardOpenOption.*;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -74,7 +73,7 @@ public class BundleWriter implements Closeable {
         if (header.compressed()) {
             // write data to temporary file
             try (DataWriter outData = DataWriters.forFile(dataFile,
-                        CREATE, WRITE, TRUNCATE_EXISTING)) {
+                writeData(outData, progress);
                 writeData(outData, progress);
             }
 

@@ -21,7 +21,7 @@ import javax.xml.bind.DatatypeConverter;
  */
 public class UnityHash128 implements Struct {
 
-    private final byte[] hash = new byte[16];
+    private byte[] hash = new byte[16];
 
     public byte[] hash() {
         return hash;

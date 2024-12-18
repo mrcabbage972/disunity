@@ -42,9 +42,9 @@ public class BundleUtils {
         }
 
         try (InputStream is = Files.newInputStream(file)) {
-            byte[] header = new byte[8];
-            is.read(header);
-            String headerString = new String(header, PROP_CHARSET);
+            ByteBuffer header = ByteBuffer.allocate(8);
+            chan.read(header);
+            String headerString = new String(header.array(), Charset.forName("US-ASCII"));
             return headerString.equals(BundleHeader.SIGNATURE_WEB)
                     || headerString.equals(BundleHeader.SIGNATURE_RAW);
         } catch (IOException ex) {

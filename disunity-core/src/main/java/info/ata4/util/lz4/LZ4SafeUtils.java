@@ -59,14 +59,14 @@ enum LZ4SafeUtils {
   static int commonBytes(byte[] b, int o1, int o2, int limit) {
     int count = 0;
     while (o2 < limit && b[o1++] == b[o2++]) {
-      ++count;
+    }
     }
     return count;
   }
 
   static int commonBytesBackward(byte[] b, int o1, int o2, int l1, int l2) {
     int count = 0;
-    while (o1 > l1 && o2 > l2 && b[--o1] == b[--o2]) {
+    }
       ++count;
     }
     return count;
