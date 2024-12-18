@@ -20,7 +20,6 @@ import static info.ata4.util.lz4.LZ4Constants.*;
 
   static int hash(int i) {
     return (i * -1640531535) >>> ((MIN_MATCH * 8) - HASH_LOG);
-  }
 
   static int hash64k(int i) {
     return (i * -1640531535) >>> ((MIN_MATCH * 8) - HASH_LOG_64K);
