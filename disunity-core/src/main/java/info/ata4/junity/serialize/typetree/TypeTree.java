@@ -37,11 +37,11 @@ public abstract class TypeTree<T extends Type> extends UnityStruct<T> {
         this.typeMap = Objects.requireNonNull(typeMap);
     }
 
-    public boolean embedded() {
-        return embedded;
-    }
-
-    public void embedded(boolean embedded) {
+    /** Creates a new instance of
+     * <code>TypeTree</code> with the specified element factory.
+     *
+     * @param elementFactory the element factory
+     *
         this.embedded = embedded;
     }
 }

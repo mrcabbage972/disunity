@@ -19,12 +19,11 @@ import java.io.IOException;
  */
 public class ObjectInfoV2 extends ObjectInfo {
 
-    private short scriptTypeIndex;
+    private short scriptTypeIndex;\n\n
 
     public short scriptTypeIndex() {
         return scriptTypeIndex;
     }
-
     public void scriptTypeIndex(short scriptTypeIndex) {
         this.scriptTypeIndex = scriptTypeIndex;
     }

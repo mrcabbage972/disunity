@@ -29,7 +29,7 @@ public abstract class UnityStruct<T extends Struct> implements Struct {
 
     protected T createElement() {
         try {
-            return elementFactory.newInstance();
+            return elementFactory.getDeclaredConstructor().newInstance();
         } catch (IllegalAccessException | InstantiationException ex) {
             throw new RuntimeException(ex);
         }

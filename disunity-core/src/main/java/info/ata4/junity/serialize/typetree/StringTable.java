@@ -43,11 +43,8 @@ public class StringTable {
         // load default strings from resource files if required
         if (!commonStringMap.containsKey(version)) {
             AtomicInteger index = new AtomicInteger(1 << 31);
-            String resourcePath = "/resources/strings/" + version + ".x.txt";
-            try (BufferedReader br = resourceReader(resourcePath)) {
-                commonStringMap.put(version, br.lines().collect(Collectors.toMap(
-                    value -> index.getAndAdd(value.length() + 1),
-                    value -> value
+                .lines()
+                .collect(Collectors.toMap(value -> index.getAndAdd(value.length() + 1), value -> value)));
                 )));
             } catch (NullPointerException ex) {
                 throw new RuntimeException("No common strings file found for version " + version);

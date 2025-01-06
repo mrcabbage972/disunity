@@ -17,6 +17,13 @@ import info.ata4.junity.UnityTableStruct;
  */
 public class FileIdentifierTable<T extends FileIdentifier> extends UnityTableStruct<T> {
 
+    /**
+     * Creates a new instance of
+     * <code>FileIdentifierTable</code> with the specified element factory.
+     *
+     * @param elementFactory the element factory
+     */
+
     public FileIdentifierTable(Class<T> elementFactory) {
         super(elementFactory);
     }

@@ -85,9 +85,8 @@ public class TypeTreeV1<T extends TypeV1> extends TypeTree<T> {
         int numChildren = node.size();
         out.writeInt(numChildren);
 
-        for (Node child : node) {
-            writeNode(out, child);
-        }
-    }
-
+    /** Creates a new instance of <code>TypeTreeV1</code> with the specified
+     * element factory.
+     *
+     * @param elementFactory the element factory
 }

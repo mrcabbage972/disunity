@@ -17,12 +17,6 @@ import java.util.Map;
 /**
  *
  * @author Nico Bergemann <barracuda415 at yahoo.de>
- */
-public class ObjectInfoTableV2<T extends ObjectInfoV2> extends ObjectInfoTableV1<T> {
-
-    public ObjectInfoTableV2(Class<T> elementFactory) {
-        super(elementFactory);
-    }
 
     @Override
     public void read(DataReader in) throws IOException {

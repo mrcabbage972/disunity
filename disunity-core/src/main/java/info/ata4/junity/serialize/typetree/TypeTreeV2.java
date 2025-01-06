@@ -28,13 +28,6 @@ public class TypeTreeV2<T extends TypeV1> extends TypeTreeV1<T> {
         super(elementFactory);
     }
 
-    public UnityVersion revision() {
-        return revision;
-    }
-
-    public void revision(UnityVersion revision) {
-        this.revision = Objects.requireNonNull(revision);
-    }
 
     public int attributes() {
         return attributes;

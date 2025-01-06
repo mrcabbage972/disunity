@@ -16,13 +16,6 @@ import java.util.Objects;
 
 /**
  *
- * @author Nico Bergemann <barracuda415 at yahoo.de>
- */
-public abstract class ObjectInfoTable<T extends ObjectInfo> extends UnityStruct<T> {
-
-    protected Map<Long, T> infoMap = new LinkedHashMap<>();
-
-    public ObjectInfoTable(Class<T> elementFactory) {
         super(elementFactory);
     }
 

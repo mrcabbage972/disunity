@@ -141,11 +141,11 @@ public class SerializedFileMetadata implements Struct {
         typeTreeBlock.markEnd(in);
         L.log(Level.FINER, "typeTreeBlock: {0}", typeTreeBlock);
 
-        // load object info table
+       // load object info table
         if (version > 14) {
-            objectInfoTable = new ObjectInfoTableV2(ObjectInfoV3.class);
+            objectInfoTable = new ObjectInfoTableV2<ObjectInfoV3>(ObjectInfoV3.class);
         } else if (version > 13) {
-            objectInfoTable = new ObjectInfoTableV2(ObjectInfoV2.class);
+            objectInfoTable = new ObjectInfoTableV2<ObjectInfoV2>(ObjectInfoV2.class);
         } else {
             objectInfoTable = new ObjectInfoTableV1(ObjectInfoV1.class);
         }
@@ -165,9 +165,9 @@ public class SerializedFileMetadata implements Struct {
         }
 
         // load external references
-        if (version > 5) {
-            externals = new FileIdentifierTable(FileIdentifierV2.class);
-        } else {
+         if (version > 5) {
+            externals = new FileIdentifierTable<FileIdentifierV2>(FileIdentifierV2.class);
+         } else {
             externals = new FileIdentifierTable(FileIdentifierV1.class);
         }
 

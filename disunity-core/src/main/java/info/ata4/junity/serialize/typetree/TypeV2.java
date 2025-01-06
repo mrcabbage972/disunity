@@ -14,13 +14,6 @@ import info.ata4.io.DataWriter;
 import java.io.IOException;
 
 /**
- *
- * @author Nico Bergemann <barracuda415 at yahoo.de>
- */
-public class TypeV2 extends TypeV1 {
-
-    // Unity 5+, the level of this type within the type tree
-    protected int treeLevel;
 
     // Unity 5+, offset to the type string
     protected int typeOffset;

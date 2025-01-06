@@ -19,6 +19,13 @@ import java.io.IOException;
  */
 public class FileIdentifierV2 extends FileIdentifierV1 {
 
+        /**
+         * Creates a new instance of
+         * <code>FileIdentifierV2</code> with the specified element factory.
+         *
+         * @param elementFactory the element factory
+         */
+        public FileIdentifierV2(ElementFactory elementFactory) {
     // Path to the asset file?
     private String assetPath;
 
